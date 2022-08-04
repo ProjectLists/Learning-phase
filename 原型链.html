@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function Star(uname, age) {
+        this.uname = uname,
+            this.age = age
+    }
+    var ldh = new Star('ldh', 12)
+    console.log(Star.prototype.__proto__.__proto__);
+    console.log(ldh.__proto__.constructor);
+    // ldh.__proto__ 相当于 Star.prototype
+    // ldh.__proto__.constructor 相当于 Star.prototype.constructor   指向的是构造函数
+    // Star.prototype.__proto__   指向的是Object的原型对象
+    // Star.prototype.__proto__.constructo   指向的是Object原型对象的构造函数Object
+    // Star.prototype.__proto__._proto  指向的是最顶端 null
+</script>
+
+</html>

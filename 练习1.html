@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+    </script>
+</head>
+
+
+<body>
+    <div id="p">默认文本</div>
+    <button onclick="myBtn()">请点击</button>
+</body>
+<script>
+    // window.onload(alert('diyi'))
+    // var myBtn = function () {
+    //     var arr = [1, 2, 3, 4, 5]
+    //     var txt = []
+    //     for (var i = 0; i < arr.length; i++) {
+    //         txt[txt.length] = arr[i]
+    //     }
+    //     document.getElementById('p').innerHTML = txt
+    //     console.log(txt)
+    // }
+    // function myBtn() {
+    //     var c = confirm('按下按钮')
+    //     if (c == true) {
+    //         alert('确认了')
+    //     } else {
+    //         alert('取消了')
+    //     }
+    // }
+    /* var skr = ''
+    for (var i = 1; i <= 9; i++) {
+        for (var j = 1; j <= i; j++) {
+            skr += j + '*' + i + '=' + j * i + '\t'
+        }
+        skr += '\n'
+    }
+    console.log(skr); */
+
+    var arr = [1, 2, 5, 6, 722, 1, 1]
+    var newArr = []
+    for (var i = 0; i < arr.length; i++) {
+        if (newArr.indexOf(arr[i]) == -1) {
+            newArr.push(arr[i])
+        }
+    }
+    console.log(newArr);
+</script>
+
+</html>

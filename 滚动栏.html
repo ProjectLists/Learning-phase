@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .w {
+            position: relative;
+            width: 1200px;
+            margin: auto;
+        }
+
+        .lan {
+            position: absolute;
+            right: 50%;
+            top: 230px;
+            transform: translate(700px, 0);
+            width: 100px;
+            height: 200px;
+            background: pink;
+            z-index: 999;
+        }
+
+        .lan span {
+            display: none;
+        }
+
+        .box01 {
+            height: 200px;
+            background: blue;
+        }
+
+        .box02 {
+            margin: 30px 0;
+            height: 500px;
+            background: black;
+        }
+
+        .box03 {
+            margin: 30px 0;
+            height: 500px;
+            background: green;
+        }
+
+        .box04 {
+            margin: 30px 0;
+            height: 500px;
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 滚动栏 -->
+    <div class="lan"><span>返回顶部</span></div>
+    <div class="w">
+        <div class="box01 "></div>
+        <div class="box02"></div>
+        <div class="box03"></div>
+        <div class="box04"></div>
+    </div>
+</body>
+<script>
+    var lan = document.querySelector('.lan')
+    var span = document.querySelector('span')
+    document.addEventListener('scroll', function () {
+        var winTop = window.pageYOffset
+        console.log(winTop);
+        if (winTop > 230) {
+            lan.style.position = 'fixed'
+            lan.style.top = 0
+        } else {
+            lan.style.position = 'absolute'
+            lan.style.top = 230 + 'px'
+        }
+        if (winTop > 600) {
+            span.style.display = 'block'
+        } else {
+            span.style.display = 'none'
+        }
+    })
+</script>
+
+</html>

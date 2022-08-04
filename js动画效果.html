@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            position: absolute;
+            left: 0;
+            top: 200px;
+            width: 200px;
+            height: 200px;
+            background: burlywood;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+    </div>
+    <button>点击500</button>
+    <button>点击800</button>
+</body>
+<script>
+    var box = document.querySelector('.box')
+    var btn = document.querySelectorAll('button')
+    btn[0].addEventListener('click', function () {
+        myFun(box, 500)
+    })
+    btn[1].addEventListener('click', function () {
+        myFun(box, 800)
+    })
+
+    function myFun(name, target) {
+        clearInterval(name.timer)
+        name.timer = setInterval(animation, 50)
+        function animation() {
+            var step = (target - name.offsetLeft) / 10
+            // 如果是正值就向上取整，如果是负值就向下取整
+            step = step > 0 ? Math.ceil(step) : Math.floor(step)
+            if (name.offsetLeft == target) {
+                clearInterval(name.timer)
+            }
+            name.style.left = name.offsetLeft + step + 'px'
+        }
+
+    }
+
+</script>
+
+</html>

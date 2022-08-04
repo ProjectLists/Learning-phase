@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .ipt {
+            border: 1px solid;
+            outline: none;
+        }
+
+        .spn {
+            margin-left: 5px;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <input type="password" class="ipt" id="ipt">
+        <span class="spn">请输入6-15位字符</span>
+    </div>
+</body>
+<script>
+    var ipt = document.getElementById('ipt')
+    var spn = document.querySelector('.spn')
+    ipt.onfocus = function () {
+        spn.style.display = "none"
+        this.style.borderColor = "pink"
+    }
+    ipt.onblur = function () {
+        this.style.borderColor = "black"
+        if (ipt.value.length < 6 || ipt.value.length > 15) {
+            spn.innerHTML = "请输入6-15位字符"
+            spn.style.display = "inline-block"
+            spn.style.color = "red"
+        } else {
+            spn.innerHTML = "输入正确"
+            spn.style.display = "inline-block"
+            spn.style.color = "green"
+        }
+    }
+</script>
+
+</html>

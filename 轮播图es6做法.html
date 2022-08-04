@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .box ul {
+            position: absolute;
+            left: 0;
+            list-style: none;
+            display: flex;
+            width: 400%;
+        }
+
+
+        .box ul li img {
+            width: 800px;
+            height: 600px;
+        }
+
+        .prev {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            height: 50px;
+            transform: translateY(-50%);
+        }
+
+        .next {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            height: 50px;
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <ul>
+            <li><img src="image/01.jpg" alt=""></li>
+            <li><img src="image/02.jpg" alt=""></li>
+            <li><img src="image/03.jpg" alt=""></li>
+        </ul>
+        <button class="prev">〈</button>
+        <button class="next">〉</button>
+    </div>
+</body>
+<script>
+
+    // 1、先添加按钮上一张和下一张的功能
+    // 2、添加滑动效果
+
+    // 创建类
+    class Banners {
+        constructor() {
+            // 获取最大的盒子
+            this.box = document.querySelector('.box')
+            // 获取ul
+            this.ul = this.box.querySelector('ul')
+            // 获取左右按钮
+            this.prev = this.box.querySelector('.prev')
+            this.next = this.box.querySelector('.next')
+            this.init()
+        }
+        // 初始化
+        init() {
+
+
+            this.animation()
+        }
+
+        // 动画效果
+        animation() {
+            console.log(this.ul.offsetLeft);
+        }
+    }
+
+    // 实例对象
+    new Banners()
+</script>
+
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // // 1、求学生成绩总和以及平均值
+        // var num = prompt('请输入班级总人数')
+        // var sum = 0;
+        // var average = 0;
+        // for (var i = 1; i <= num; i++) {
+        //     var score = prompt('请输入第' + num + '个人的成绩')
+        //     sum = sum + Number(score)
+
+        // }
+        // alert('总和是' + sum)
+        // average = sum / num
+        // alert('平均分是' + average)
+
+        // //星星
+        // var str = '';
+        // var num = prompt('请问你想要多少颗星星')
+        // for (var i = 1; i <= num; i++) {
+        //     str = str + '★'
+        //     console.log(str);
+        // }
+        // console.log(str);
+
+        // while
+        // var sum = 0;
+        // var j = 1;
+        // while (i <= 100) {
+        //     console.log('今年' + i + '岁')
+        //     i++;
+        // }
+        // while (j <= 100) {
+        //     sum += j
+        //     j++;
+
+        // }
+        // console.log(sum)
+
+        // var meesege = prompt('你要停止吗？');
+        // while (meesege == '不停止') {
+        //     meesege = prompt('你要停止吗？');
+        // }
+        // alert('恭喜你停止成功')
+
+        // var str = '';
+        // for (var i = 1; i <= 9; i++) {
+        //     for (var j = 1; j <= i; j++) {
+        //         str += j + 'x' + i + '=' + j * i + '\t'
+        //     }
+        //     str += '\n'
+        // }
+        // console.log(str)
+
+        // var i = 1;
+        // do {
+        //     console.log(i)
+        //     i++;
+        // } while (i <= 10)
+
+
+        // var arr = [2, 4, 7, 8, 90]
+        // var max = 0;
+        // for (var i = 0; i < arr.length; i++) {
+        //     if (arr[i] > max) {
+        //         max = arr[i]
+        //     }
+        // }
+        // console.log(max)
+
+        // var str = '';
+        // var arr = [2, 4, 7, 8, 90]
+        // for (var i = 0; i < arr.length; i++) {
+        //     str += arr[i] + "&"
+        // }
+        // console.log(str)
+
+        // var arr = [2, 4, 3, 6, 8]
+        // arr[5] = 100;
+        // arr[0] = 1;
+        // console.log(arr)
+
+        // document.createElement("getNew")
+
+        // document.write(Date());
+        // document.getElementById("p1").innerHTML = "New text!";
+
+        /* // 用函数执行冒泡排序
+        var arrs = [5, 2, 1, 3, 4]
+        var fun = function (arr) {
+            for (var i = 0; i < arr.length; i++) {
+                for (var j = 0; j < arr.length - i; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        var temp = arr[j]
+                        arr[j] = arr[j + 1]
+                        arr[j + 1] = temp
+                    }
+                }
+            }
+            console.log(arr)
+        }
+        fun(arrs) */
+
+        // 冒泡排序
+        var newArr = [5, 2, 1, 3, 4, 6]
+        function fun(arr) {
+            for (var i = 0; i < newArr.length - 1; i++) {
+                for (var j = 0; j < newArr.length - 1 - i; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        var temp = arr[j]
+                        arr[j] = arr[j + 1]
+                        arr[j + 1] = temp
+                    }
+                }
+            }
+            console.log(arr)
+        }
+        fun(newArr)
+    </script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <p id="p1">Hello World!</p>
+</body>
+
+</html>

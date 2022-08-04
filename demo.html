@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 50px;
+            height: 50px;
+            background: red;
+            animation: move 3s linear infinite;
+            border-radius: 50%;
+        }
+
+        @keyframes move {
+            0% {}
+
+            25% {
+                transform: translate(360px, 360px);
+            }
+
+            50% {
+                transform: translate(720px, -10px);
+            }
+
+            75% {
+                transform: translate(1080px, 360px);
+            }
+
+            100% {
+                transform: translate(1440px, -10px);
+            }
+        }
+    </style>
+    <script>
+        // var num1 = 07;
+        // var num2 = 0x9;
+        // console.log(num1 + '+' + num2)
+
+        // var a
+        // var b = null
+        // console.log(typeof a);
+        // console.log(b + 1);
+
+        // var a = "123"
+        // a = parseFloat("atatatat55")
+        // console.log(a);
+    </script>
+</head>
+
+<body>
+    <div class="box">
+    </div>
+</body>
+
+</html>

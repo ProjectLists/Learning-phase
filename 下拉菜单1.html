@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .box {
+            width: 500px;
+            height: 300px;
+            border: 1px solid red;
+            margin: 100px auto;
+        }
+
+        .box .title,
+        .item-bd {
+            display: flex;
+            list-style: none;
+        }
+
+        .box .title li {
+            width: 150px;
+            height: 40px;
+            border: 1px solid black;
+            text-align: center;
+            line-height: 40px;
+        }
+
+        .box .title li:hover {
+            background: orange;
+            cursor: pointer;
+        }
+
+        .box .item-bd {
+            height: 0;
+            background: red;
+            overflow: hidden;
+            transition: all .3s;
+        }
+
+        .box .item-bd li {
+            display: none;
+            width: 150px;
+            height: 100%;
+
+            padding-left: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <ul class="title">
+            <li>
+                标题1
+            </li>
+            <li>
+                标题2
+            </li>
+            <li>
+                标题3
+            </li>
+        </ul>
+
+        <ul class="item-bd">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+    </div>
+    <script>
+        // 获取ul
+        let title = document.querySelector('.title')
+        // 获取title里所有的li
+        let tLi = document.querySelectorAll('.title li')
+        // 获取itemBd
+        let itemBd = document.querySelector('.item-bd')
+        // 获取itemBd里所有的li
+        let bdLi = document.querySelectorAll('.item-bd li')
+        // 创建一个变量
+        let flag = true
+
+        // 遍历
+        for (let i = 0; i < tLi.length - 2; i++) {
+            console.log(i);
+            // 给所有li添加鼠标移入事件
+            tLi[i].addEventListener('mouseenter', function () {
+                for (let a = 0; a < bdLi.length; a++) {
+                    bdLi[a].style.display = 'none'
+                }
+                itemBd.style.height = '200px'
+                bdLi[i].style.display = 'block'
+            })
+
+            // 给所有li添加鼠标移出事件
+            tLi[i].addEventListener('mouseleave', function () {
+                itemBd.style.height = '0'
+            })
+        }
+    </script>
+</body>
+
+</html>

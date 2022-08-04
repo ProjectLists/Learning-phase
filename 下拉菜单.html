@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .box>ul {
+            width: 342px;
+            height: 30px;
+            border-bottom: 1px solid grey;
+            margin: 100px auto;
+            line-height: 30px;
+
+        }
+
+        .box>ul>li {
+            float: left;
+        }
+
+        .box>ul>li>a {
+            padding: 5px 20px;
+        }
+
+        .box>ul>li>a:hover {
+            background: orangered;
+        }
+
+        .ultop li ul {
+            width: 114px;
+            background: gray;
+            text-align: center;
+        }
+
+        .ultop li ul {
+            display: none;
+        }
+
+
+        .ultop li ul li:hover {
+            background: orange;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <ul class="ultop">
+            <li>
+                <a href="#">下拉菜单1</a>
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">下拉菜单2</a>
+                <ul>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">下拉菜单3</a>
+                <ul>
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+    // 获取外层ul的每个li
+    var liTop = document.querySelector('.ultop').children
+
+    for (var i = 0; i < liTop.length; i++) {
+        liTop[i].onmouseover = function () {
+            this.children[1].style.display = "block"
+        }
+        liTop[i].onmouseout = function () {
+            this.children[1].style.display = "none"
+        }
+    }
+</script>
+
+</html>

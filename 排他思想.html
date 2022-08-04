@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 300px;
+            height: 30px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <button id="kk">按钮</button>
+        <button>按钮</button>
+        <button>按钮</button>
+        <button>按钮</button>
+        <button>按钮</button>
+    </div>
+</body>
+<script>
+    var box = document.querySelector(".box")
+    var btn = box.getElementsByTagName("button")
+
+    // 遍历每个标签
+    for (var i = 0; i < btn.length; i++) {
+        // 给每个button加点击事件
+        btn[i].onclick = function () {
+            // 内层遍历，每点击一次就全部恢复白色
+            for (var i = 0; i < btn.length; i++) {
+                btn[i].style.backgroundColor = "#fff"
+            }
+            // 点击之后 当前按钮变粉色    注意：这个只能写在后面不然会被覆盖
+            this.style.backgroundColor = "pink"
+        }
+    }
+</script>
+
+</html>

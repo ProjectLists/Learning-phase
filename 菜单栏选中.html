@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            position: relative;
+            height: 50px;
+            border: 1px solid gray;
+            text-align: center;
+            line-height: 50px;
+            margin: 100px 100px;
+        }
+
+
+        .box ul li {
+            float: left;
+            list-style: none;
+            width: 152px;
+            color: black;
+            cursor: pointer;
+        }
+
+        .box ul .current {
+            color: #fff;
+        }
+
+        .b {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 152px;
+            height: 50px;
+            background: black;
+            z-index: -1;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <ul>
+            <li class="current">居家生活</li>
+            <li>户外运动够欧冠</li>
+            <li>零食饮料</li>
+            <li>医药健康</li>
+            <li>关于我们</li>
+        </ul>
+        <div class="b"></div>
+    </div>
+    </div>
+
+
+</body>
+<script>
+    var b = document.querySelector('.b')
+    var ul = document.querySelector('ul')
+    var li = ul.children
+    for (var i = 0; i < li.length; i++) {
+        // 给每个li 添加一个自定义属性data-index
+        li[i].setAttribute('data-index', i)
+
+
+        li[i].addEventListener('click', function () {
+            var indexs = this.getAttribute('data-index')
+            for (var j = 0; j < li.length; j++) {
+                li[j].style.color = 'black'
+            }
+            this.style.color = '#fff'
+            b.style.width = this.offsetWidth + 'px'
+            console.log(this.offsetWidth);
+            myFun(b, this.offsetWidth * indexs)
+
+            console.log(1);
+        })
+    }
+
+
+    // 动画函数
+    function myFun(obj, target, callback) {
+        clearInterval(obj.timer)
+        obj.timer = setInterval(animation, 10)
+        function animation() {
+            var step = (target - obj.offsetLeft) / 10
+            // 如果是正值就向上取整，如果是负值就向下取整
+            step = step > 0 ? Math.ceil(step) : Math.floor(step)
+            if (obj.offsetLeft == target) {
+                clearInterval(obj.timer)
+                if (callback) {
+                    callback()
+                }
+            }
+            obj.style.left = obj.offsetLeft + step + 'px'
+        }
+
+    }
+</script>
+
+</html>

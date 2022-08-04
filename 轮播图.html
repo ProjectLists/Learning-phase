@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            position: relative;
+            width: 500px;
+            height: 300px;
+            border: 1px solid red;
+            margin: 100px auto;
+        }
+
+        .box img {
+            width: 500px;
+            height: 300px;
+        }
+
+        .box ul {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-30px);
+            width: 65px;
+            height: 30px;
+            list-style: none;
+        }
+
+        .box ul li {
+            float: left;
+            width: 15px;
+            height: 15px;
+            background: #fff;
+            border-radius: 50%;
+        }
+
+        .box ul li:nth-child(n+2) {
+            margin: 0 0 0 10px;
+        }
+
+        .box ul .current {
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <img src="image/01.jpg" alt="">
+        <ul class="point">
+            <li class="current"></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</body>
+<script>
+    var img = document.querySelector('.box').querySelector('img')
+    var imgArr = ['image/01.jpg', 'image/02.jpg', 'image/03.jpg']
+    var li = document.querySelector('.point').querySelectorAll('li')
+    var timer = 0;
+    var sl = setInterval(myFun, 1000)
+    function myFun() {
+
+        if (timer == 2) {
+            timer = 0
+        } else {
+            timer++
+        }
+        img.src = imgArr[timer]
+        for (var e = 0; e < li.length; e++) {
+            li[e].className = ''
+        }
+        li[timer].className = 'current'
+    }
+
+    for (var i = 0; i < li.length; i++) {
+        // 创建属性值给每个li标记序号
+        li[i].setAttribute('data-index', i + 1)
+
+        li[i].addEventListener('mouseover', function () {
+            // 获取li的标记序号
+            var index = this.getAttribute('data-index')
+            // 修改图片src属性值 实现点对图片
+            img.src = 'image/0' + index + '.jpg'
+            // 清除所有点的类
+            for (var j = 0; j < li.length; j++) {
+                li[j].className = ''
+            }
+            this.className = 'current'
+            clearInterval(sl)
+        })
+
+        li[i].addEventListener('mouseout', function () {
+            setInterval(myFun, 1000)
+        })
+    }
+
+
+
+
+</script>
+
+</html>

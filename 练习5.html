@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        em {
+            font-style: normal;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" placeholder="请输入用户名" class="uname"> <em class="uname-hint"></em>
+    <br />
+    <br />
+    <br />
+    <input type="text" placeholder="请输入密码" class="password"> <em class="paw-hint"></em>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <button class="btn">提交</button>
+
+    <script>
+        let btn = document.querySelector('.btn')
+        let uname = document.querySelector('.uname')
+        let paw = document.querySelector('.password')
+        let uHint = document.querySelector('.uname-hint')
+        let pHint = document.querySelector('.paw-hint')
+        // 添加失去焦点事件
+        uname.addEventListener('blur', validateUname)
+        function validateUname() {
+            // 验证用户名正则表达式
+            let reg = /^[0-9a-zA-Z]{6,18}$/
+            if (reg.test(uname.value)) {
+                uHint.style.color = 'green'
+                uHint.innerHTML = '输入的格式正确'
+                return true
+
+            } else {
+                uHint.style.color = 'red'
+                uHint.innerHTML = '请输入正确的格式'
+                return false
+            }
+
+        }
+
+        paw.addEventListener('blur', validatePaw)
+        function validatePaw() {
+            // 验证用户名正则表达式
+            let reg = /^[0-9a-zA-Z]{6,18}$/
+            if (reg.test(paw.value)) {
+                pHint.style.color = 'green'
+                pHint.innerHTML = '输入的格式正确'
+                return true
+
+            } else {
+                pHint.style.color = 'red'
+                pHint.innerHTML = '请输入正确的格式'
+                return false
+            }
+
+        }
+
+        btn.addEventListener('click', function () {
+            if (validateUname() && validatePaw()) {
+                alert('提交成功')
+            } else if (validateUname() === false) {
+                uname.focus()
+            } else if (validateUname() === false) {
+                uname.focus()
+                console.log(1);
+            }
+
+        })
+
+    </script>
+</body>
+
+</html>

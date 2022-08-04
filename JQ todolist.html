@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        em {
+            font-style: normal;
+            background: black;
+            color: #fff;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            text-align: center;
+        }
+
+        .box {
+            margin: 50px;
+            width: 300px;
+        }
+
+        .hd {
+            display: flex;
+            justify-content: space-between;
+            width: 300px;
+            height: 20px;
+            background: #cdcdcd;
+        }
+
+        .bd li {
+            padding: 10px 0;
+            border-bottom: 1px solid #cdcdcd;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .bd li a {
+            width: 20px;
+            height: 20px;
+            background: black;
+            color: pink;
+            text-align: center;
+        }
+
+        .complete {
+            margin-top: 50px;
+        }
+    </style>
+    <script src="js/jQuery.min.js"></script>
+</head>
+
+<body>
+    <div class="box">
+        <input type="text" name="submit" placeholder="请输入内容">
+        <br />
+        <br />
+
+        <div class="wait">
+            <div class="hd">
+                <span>待办</span><em class="wait-sum">0</em>
+            </div>
+            <ul class="bd">
+                <!-- <li><span><input type="checkbox" name="checkbox">123</span><a href="javascript:;">X</a></li> -->
+            </ul>
+        </div>
+
+        <div class="complete">
+            <div class="hd">
+                <span>完成</span><em class="complete-sum">0</em>
+            </div>
+            <ul class="bd">
+            </ul>
+        </div>
+
+    </div>
+
+    <script>
+        $(function () {
+            init()
+            // 给文本框添加键盘事件，提交内容存储到本地
+            $("input[name='submit']").on("keydown", function (e) {
+                let data = getData()
+                // 获取文本框内容
+                let subVal = $(this).val()
+                if (e.key == "Enter") {
+                    if (subVal == "") {
+                        alert("内容不能为空！")
+                    } else {
+                        // 把获取的内容存到本地
+                        data.push({ val: subVal, done: 'false' })
+                        // 把数据存到本地
+                        localStorage.setItem('data', JSON.stringify(data))
+
+                        // 清空文本框值
+                        $(this).val("")
+                        // 渲染数据
+                        init()
+                    }
+                }
+
+            })
+
+            // 复选框点击事件
+            $("ul").on('change', "input", function () {
+                let data = getData()
+                // 获取该复选框的索引
+                let idx = $(this).parent().parent().attr("data-idx")
+
+                // 判断该复选框是true还是false
+                if ($(this).prop("checked")) {
+                    // 该选中的复选框done等于true
+                    data[idx].done = true
+                    // 最新数据存到本地
+                    localStorage.setItem('data', JSON.stringify(data))
+                } else {
+                    // 该选中的复选框done等于false
+                    data[idx].done = false
+                    // 最新数据存到本地
+                    localStorage.setItem('data', JSON.stringify(data))
+                }
+                // 渲染数据
+                init()
+            })
+
+            // 删除事件
+            $("ul").on("click", "a", function () {
+                // 获取本地数据
+                let data = getData()
+                // 获取该删除按钮的li的索引
+                let idx = $(this).parent().attr("data-idx")
+                // 删除data里的数据
+                data.splice(idx, 1)
+                // 最新数据存到本地
+                localStorage.setItem('data', JSON.stringify(data))
+
+                // 渲染数据
+                init()
+            })
+
+
+            // 渲染数据
+            function init() {
+                let data = getData()
+                // 清空数据 ！注意这里要清空待办和完成的数据
+                $(".wait .bd,.complete .bd").empty()
+                // 遍历数据
+                $(data).each(function (i, e) {
+                    // 判断done是true还是false
+                    if (e.done == true) {
+                        let li = `<li data-idx=${i}><span><input type="checkbox" name="checkbox" checked>${e.val}</span><a href="javascript:;">X</a></li>`
+                        $(".complete .bd").append(li)
+
+                    } else {
+                        let li = `<li data-idx=${i}><span><input type="checkbox" name="checkbox">${e.val}</span><a href="javascript:;">X</a></li>`
+                        $(".wait .bd").append(li)
+
+                    }
+                })
+                $(".complete-sum").html($(".complete .bd li").length)
+                $(".wait-sum").html($(".wait .bd li").length)
+
+            }
+
+            // 获取本地数据
+            function getData() {
+                // 获取本地存储的数据
+                let data = JSON.parse(localStorage.getItem('data'))
+                // 判断data是否为null
+                if (data != null) {
+                    return data
+                } else {
+                    return []
+                }
+            }
+
+
+
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 600px;
+            border: 1px solid red;
+        }
+
+        .box input {
+            width: 35px;
+        }
+
+        table {
+            width: 500px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        价格范围：<input type="text" class="min"> —— <input type="text" class="max">
+        <button class="price-btn">提交</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        商品名称：<input type="text" class="item-name">
+
+        <button class="name-btn">提交</button>
+        <br />
+        <br />
+        <br />
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>商品ID</th>
+                    <th>商品名称</th>
+                    <th>商品价格</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        let data = [{
+            proId: 1001,
+            proName: "小米",
+            price: 1599
+        },
+        {
+            proId: 1002,
+            proName: "红米k30",
+            price: 1699
+        },
+        {
+            proId: 1003,
+            proName: "苹果",
+            price: 5999
+        },
+        {
+            proId: 1004,
+            proName: "华为",
+            price: 6999
+        },
+        {
+            proId: 1005,
+            proName: "苹果",
+            price: 9999
+        },
+        ]
+
+        // 获取tbody
+        let tbody = document.querySelector('tbody')
+        // 获取价格范围
+        let min = document.querySelector('.min')
+        let max = document.querySelector('.max')
+        // 获取商品名称值
+        let itemName = document.querySelector('.item-name')
+        // 获取价格范围按钮
+        let priceBtn = document.querySelector('.price-btn')
+        // 获取商品查询按钮
+        let nameBtn = document.querySelector('.name-btn')
+        // 执行渲染函数
+        init(data)
+        // 创建一个渲染函数
+        function init(arr) {
+            arr.forEach(function (val, index) {
+                // 创建一个tr节点
+                let tr = document.createElement('tr')
+                // 给tr赋值
+                tr.innerHTML = `<td>${val.proId}</td>
+                    <td>${val.proName}</td>
+                    <td>${val.price}</td>`
+                // 把tr添加到tbody里
+                tbody.appendChild(tr)
+            })
+        }
+
+        // 给价格范围按钮添加点击事件
+        priceBtn.addEventListener('click', function () {
+            tbody.innerHTML = ''
+            let newData = data.filter(function (val, index) {
+                return val.price >= min.value.trim() && val.price <= max.value.trim()
+            })
+
+            // 重新渲染
+            init(newData)
+            itemName.value = ''
+        })
+
+        // 给商品查询按钮添加点击事件
+        nameBtn.addEventListener('click', function () {
+            tbody.innerHTML = ''
+            let newData = data.filter(function (val, index) {
+                return val.proName == itemName.value.trim()
+            })
+            console.log(itemName.value);
+            // 重新渲染
+            init(newData)
+            min.value = max.value = ''
+        })
+
+
+
+    </script>
+</body>
+
+</html>

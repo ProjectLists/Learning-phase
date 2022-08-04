@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            width: 500px;
+            margin: 100px auto;
+        }
+
+        thead tr th {
+            padding: 10px 0;
+        }
+
+        tbody tr {
+            text-align: center;
+        }
+
+        .add {
+            width: 250px;
+            margin: 100px auto;
+        }
+
+        .add input {
+            width: 70px;
+        }
+
+        .add button {
+            margin-top: 20px;
+            margin-left: 80px;
+        }
+    </style>
+</head>
+
+<body>
+    <table border="1" cellspacing='0'>
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>科目</th>
+                <th>成绩</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+
+</body>
+<script>
+    var datas = [{
+        name: '小明',
+        suject: 'web前端',
+        score: '89'
+    }, {
+        name: '小m',
+        suject: '高数',
+        score: '78'
+    }, {
+        name: '小a',
+        suject: '英语',
+        score: '32'
+    }, {
+        name: '小e',
+        suject: '语文',
+        score: '77'
+    }, {
+        name: '小r',
+        suject: '数学',
+        score: '22'
+    },
+    ]
+
+
+    //获取tbody
+    var tbody = document.querySelector('tbody')
+    // 创建tr
+    // 遍历数组对象 有几组对象就有几行tr
+    for (var i = 0; i < datas.length; i++) {
+        var tr = document.createElement('tr')
+        tbody.appendChild(tr)
+
+        //创建td    
+        //遍历的datas里的对象   k是属性
+        for (var k in datas[i]) {
+            var td = document.createElement('td')
+            td.innerHTML = datas[i][k]
+            tr.appendChild(td)
+        }
+
+        // 创建删除格
+        var as = document.createElement('td')
+        // 给每个删除格加a标签
+        as.innerHTML = "<a href='javascript:;'>删除</a> "
+        //添加到tr里
+        tr.appendChild(as)
+        // 获取所有a标签
+        var a = as.children
+        // 遍历a标签
+        for (var j = 0; j < a.length; j++) {
+            // 给所有的a标签添加点击事件
+            a[j].onclick = function () {
+                // 获取a标签的父亲的父亲tr
+                var tr = this.parentNode.parentNode
+                // 删除tbody下面的tr
+                tbody.removeChild(tr)
+            }
+        }
+    }
+
+
+</script>
+
+</html>

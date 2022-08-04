@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 500px;
+            height: 500px;
+            border: 1px solid black;
+            margin: 0 auto;
+        }
+
+        input[class=all] {
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <input type="checkbox" name="" id="" class="all">全选
+        <br />
+        <input type="checkbox" name="" id="" class="checkboxs">01
+        <br />
+        <input type="checkbox" name="" id="" class="checkboxs">02
+        <br />
+        <input type="checkbox" name="" id="" class="checkboxs">03
+        <br />
+        <input type="checkbox" name="" id="" class="checkboxs">04
+        <br />
+        <input type="checkbox" name="" id="" class="checkboxs">05
+    </div>
+
+    <script>
+        // 获取全选复选框
+        var allBtn = document.querySelector('.all')
+
+        // 获取其它几个子复选框
+        let checkboxs = document.querySelectorAll('.checkboxs')
+
+        // 给全选框添加点击事件
+        allBtn.addEventListener('click', function () {
+            // 遍历子复选框
+            for (let i = 0; i < checkboxs.length; i++) {
+                // 如果全选框返回的是true 那么所有子复选框全部为true,反之
+                checkboxs[i].checked = this.checked
+            }
+        })
+
+        // 遍历子复选框
+        checkboxs.forEach(function (value, index) {
+            // 给每个子复选框添加点击事件
+            checkboxs[index].addEventListener('click', function () {
+                // 遍历子复选框检查是否有false
+                checkboxs.forEach(function (val, k) {
+                    if (checkboxs[k].checked === false) {
+                        allBtn.checked = false
+                    }
+                })
+            })
+        })
+    </script>
+</body>
+
+</html>

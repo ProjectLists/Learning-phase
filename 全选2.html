@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            margin: 100px auto;
+        }
+
+        .all input {
+            width: 30px;
+            height: 30px;
+        }
+
+        .ipc {
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="all"><input type="checkbox" name="" id=""></div>
+        <div class="ipc">
+            <input type="checkbox" name="" id="">
+            <input type="checkbox" name="" id="">
+            <input type="checkbox" name="" id="">
+            <input type="checkbox" name="" id="">
+            <input type="checkbox" name="" id="">
+        </div>
+    </div>
+</body>
+<script>
+    var all = document.getElementsByClassName('all')[0].children[0]
+    var ipc = document.getElementsByClassName('ipc')[0].children
+    console.log(ipc);
+    all.onclick = function () {
+        for (let i = 0; i < ipc.length; i++) {
+            ipc[i].checked = this.checked
+        }
+    }
+    // 先遍历复选框给每个复选框加点击事件
+    for (var j = 0; j < ipc.length; j++) {
+        console.log(ipc[j]);
+        ipc[j].onclick = function () {
+
+            var flag = true
+            // 遍历复选框 查询每次点击复选框是否有全部选上
+            for (var e = 0; e < ipc.length; e++) {
+                if (ipc[e].checked == false) {
+                    flag = false
+                }
+            }
+            all.checked = flag
+        }
+    }
+
+</script>
+
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+    <script>
+        /* var str = 'abscdesedcbasss'
+        var obj = {}
+        for (var i = 0; i < str.length; i++) {
+            var char = str.charAt([i])
+            var strs = str[i]
+            if (obj[strs]) {
+                obj[strs]++
+            } else {
+                obj[strs] = 1
+            }
+        }
+        var max = 0
+        var ch = ''
+        for (var k in obj) {
+            if (obj[k] > max) {
+                max = obj[k]
+                ch = k
+            }
+        }
+        console.log(max, ch); */
+
+        /* var arr = [5, 4, 2, 3, 1]
+        for (var i = 0; i < arr.length - 1; i++) {
+            for (var j = 0; j < arr.length - 1 - i; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    var temp = arr[j]
+                    arr[j] = arr[j + 1]
+                    arr[j + 1] = temp
+                }
+            }
+        }
+        console.log(arr); */
+
+        var str = 'iotnawoin212'
+        function _search(str) {
+            // 补全代码
+            for (let i = 0; i < str.length; i++) {
+                if (typeof (Number(str[i])) === 'number') {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        console.log(_search(str));
+
+    </script>
+</head>
+
+<body>
+    <p>1</p>
+    <p>2</p>
+</body>
+
+</html>

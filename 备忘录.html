@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        i {
+            font-style: normal;
+        }
+
+        em {
+            display: block;
+            font-style: normal;
+            font-size: 12px;
+            padding: 0 5px;
+            border-bottom: 1px solid #636363;
+            margin-top: 10px;
+        }
+
+        .box {
+            width: 1000px;
+            margin: 0 auto;
+        }
+
+        .box-hd {
+            position: relative;
+            width: 500px;
+            margin: 0 auto;
+        }
+
+        .text-sum {
+            position: absolute;
+            right: 80px;
+            bottom: -20px;
+
+        }
+
+        .box-bd {
+            display: flex;
+            margin-top: 40px;
+        }
+
+        .text-box {
+            width: 400px;
+            height: 200px;
+            resize: none;
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        .subtn {
+            position: absolute;
+            bottom: 5px;
+            width: 80px;
+            height: 40px;
+        }
+
+        .box-bd .item-title {
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            width: 500px;
+            height: 30px;
+            background: black;
+            color: #fff;
+            line-height: 30px;
+            padding: 0 10px;
+        }
+
+        .item-sum {
+            width: 25px;
+            height: 25px;
+            background: #fff;
+            color: black;
+            border-radius: 50%;
+            line-height: 25px;
+            text-align: center;
+            margin-top: 3px;
+        }
+
+        .finish {
+            margin-left: 20px;
+        }
+
+        .item-content li {
+            border-bottom: 1px solid #cdcdcd;
+            margin: 10px 0 0 10px;
+            padding: 0 10px;
+            overflow: hidden;
+        }
+
+        .item-content li span {
+            float: left;
+        }
+
+        .del {
+            float: right;
+        }
+
+        .text-main {
+            display: inline-block;
+            width: 400px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        input[type=checkbox] {
+            vertical-align: text-top;
+            margin-right: 5px;
+        }
+
+        .box-bd button {
+            width: 30px;
+            background: #fff;
+            border: 1px solid black;
+            cursor: pointer;
+            transition: all .3s;
+        }
+
+        .box-bd button:hover {
+            background: black;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="box-hd">
+            <i class="text-sum">200/200</i>
+            <textarea type="text" class="text-box"></textarea><button class="subtn">提交</button>
+        </div>
+        <div class="box-bd">
+            <div class="wait">
+                <div class="item-title">
+                    <span>待完成事项</span>
+                    <span class="item-sum">1</span>
+                </div>
+
+                <div class="wait-box">
+                    <!-- <div>
+                        <em>2022-7-29</em>
+                        <ul class="item-content">
+                            <li>
+                                <span>
+                                    <input type="checkbox">
+                                    <i class="text-main">122312wghaa12123123312h15151114125123123123</i>
+                                </span>
+                                <button class="del">X</button>
+                            </li>
+                    </div> -->
+                </div>
+            </div>
+
+            <div class="finish">
+                <div class="item-title">
+                    <span>已完成事项</span>
+                    <span class="item-sum">1</span>
+                </div>
+
+                <div class="finish-box">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 获取最大盒子
+        let box = document.querySelector('.box')
+        // 获取盒子头部
+        let boxHd = box.querySelector('.box-hd')
+        // 获取盒子内容
+        let boxBd = box.querySelector('.box-bd')
+        // 获取文本域
+        let textBox = boxHd.querySelector('.text-box')
+        // 获取提交按钮
+        let suBtn = boxHd.querySelector('.subtn')
+        // 获取待完成内容盒子
+        let waitBox = boxBd.querySelector('.wait-box')
+        // 获取待完成内容盒子
+        let finishBox = boxBd.querySelector('.finish-box')
+
+        let data = getData()
+        // let data = [{ val: '12312312', time: '2022-8-1', done: false },
+        // { val: '111s1s1s1', time: '2022-8-1', done: false },
+        // { val: '22f2f2f2', time: '2022-8-2', done: false },
+        // { val: '12312312', time: '2022-8-3', done: false },
+        // { val: '12312312', time: '2022-8-2', done: false }]
+
+
+        // 创建一个空数组存时间数据
+        let waitArr = []
+        let finishArr = []
+        // 渲染
+        render()
+
+
+        // 给提交按钮添加点击事件
+        suBtn.addEventListener('click', function () {
+
+            // 获取当前文本域值
+            let text = textBox.value.trim()
+
+            // 当前最新时间
+            let newDate = nowDate()
+
+            // 添加数据
+            data.push({ val: text, time: newDate, done: false })
+            localStorage.setItem('data', JSON.stringify(data))
+
+            // 渲染
+            render()
+
+            textBox.value = ''
+        })
+
+
+        // 复选框获取
+        function getCBox() {
+            // 获取每个复选框
+            let cBox = boxBd.querySelectorAll('input[type=checkbox]')
+            // 遍历每个复选框
+            for (let i = 0; i < cBox.length; i++) {
+                // 给每个复选框添加change事件
+                cBox[i].addEventListener('click', function () {
+
+                    // 判断当前点击复选框的属性checked是否为true
+                    if (this.checked) {
+                        data[i].done = true
+                    } else {
+                        data[i].done = false
+                    }
+
+                    // 更新本地数据
+                    localStorage.setItem('data', JSON.stringify(data))
+                    console.log(this);
+                    // 渲染
+                    render()
+                })
+            }
+        }
+
+
+
+        // 渲染数据
+        function render() {
+            // 当前最新时间
+            let newDate = nowDate()
+
+            // 清空元素
+            waitBox.innerHTML = ''
+            finishBox.innerHTML = ''
+
+
+
+            // 遍历数组对象
+            for (let i = 0; i < data.length; i++) {
+
+                if (data[i].done == true) {
+                    // 筛选重复的时间
+                    if (finishArr.indexOf(data[i].time) == -1) {
+                        finishArr.push(data[i].time)
+                    }
+                } else {
+                    // 筛选重复的时间
+                    if (waitArr.indexOf(data[i].time) == -1) {
+                        waitArr.push(data[i].time)
+                    }
+                }
+            }
+
+
+
+            for (let i = 0; i < finishArr.length; i++) {
+                // 创建div节点
+                let div = document.createElement('div')
+                // 给div节点添加内容
+                let itemTime = `<em>${finishArr[i]}</em>
+                        <ul class="item-content"></ul>`
+                div.innerHTML = itemTime
+
+                // 把div添加到finishBox里面
+                finishBox.appendChild(div)
+
+                // 获取每个em元素
+                let em = finishBox.querySelectorAll('em')
+
+                data.forEach(function (val, index) {
+                    // 判断如果数组对象里的time是否等于em元素的值
+                    if (data[index].time == em[i].innerText && data[index].done == true) {
+                        // 创建li节点
+                        let lis = document.createElement('li')
+                        // 获取ul em的下一个兄弟节点
+                        let ul = em[i].nextElementSibling
+                        // 添加li内容
+                        let li = `
+                            <span>
+                            <input type="checkbox" checked>
+                            <i class="text-main">${data[index].val}</i>
+                            </span>
+                             <button class="del">X</button>
+                             `
+                        lis.innerHTML = li
+
+                        // 把li添加到ul里面
+                        ul.appendChild(lis)
+                        return
+                    }
+                })
+
+
+            }
+
+            for (let i = 0; i < waitArr.length; i++) {
+                // 创建div节点
+                let div = document.createElement('div')
+                // 给div节点添加内容
+                let itemTime = `<em>${waitArr[i]}</em>
+                        <ul class="item-content"></ul>`
+                div.innerHTML = itemTime
+
+                // 把div添加到waitBox里面
+                waitBox.appendChild(div)
+                // 获取每个em元素
+                let em = waitBox.querySelectorAll('em')
+
+                data.forEach(function (val, index) {
+                    // 判断如果数组对象里的time是否等于em元素的值
+                    if (data[index].time == em[i].innerText && data[index].done == false) {
+                        // 创建li节点
+                        let lis = document.createElement('li')
+                        // 获取ul em的下一个兄弟节点
+                        let ul = em[i].nextElementSibling
+
+                        // 添加li内容
+                        let li = `
+                            <span>
+                            <input type="checkbox">
+                            <i class="text-main">${data[index].val}</i>
+                            </span>
+                             <button class="del">X</button>
+                             `
+                        lis.innerHTML = li
+
+                        // 把li添加到ul里面
+                        ul.appendChild(lis)
+                    }
+                })
+            }
+
+
+
+
+            // // 遍历数组
+            // for (let i = 0; i < flag.length; i++) {
+            //     // 创建div节点
+            //     let div = document.createElement('div')
+            //     // 给div节点添加内容
+            //     let itemTime = `<em>${flag[i]}</em>
+            //     <ul class="item-content"></ul>`
+            //     div.innerHTML = itemTime
+            //     console.log("waitArr" + ':' + waitArr, "finishArr" + ":" + finishArr);
+            //     data.forEach(function (val, index) {
+
+
+            //         if (data[index].done === true) {
+            //             // 把div添加到finishBox里面
+            //             finishBox.appendChild(div)
+
+            //             // 获取每个em元素
+            //             var em = boxBd.querySelectorAll('em')
+            //             // 创建li节点
+            //             let lis = document.createElement('li')
+            //             // 判断如果数组对象里的time是否等于em元素的值
+            //             if (data[index].time == em[i].innerText) {
+            //                 // 获取ul em的下一个兄弟节点
+            //                 let ul = em[i].nextElementSibling
+
+            //                 // 添加li内容
+            //                 let li = `
+            //                 <span>
+            //                 <input type="checkbox" checked>
+            //                 <i class="text-main">${data[index].val}</i>
+            //                 </span>
+            //                  <button class="del">X</button>
+            //                  `
+            //                 lis.innerHTML = li
+
+            //                 // 把li添加到ul里面
+            //                 ul.appendChild(lis)
+            //             }
+            //         } else {
+            //             // 把div添加到waitBox里面
+            //             waitBox.appendChild(div)
+
+            //             // 获取每个em元素
+            //             var em = boxBd.querySelectorAll('em')
+            //             // 创建li节点
+            //             let lis = document.createElement('li')
+            //             // 判断如果数组对象里的time是否等于em元素的值
+            //             if (data[index].time == em[i].innerText) {
+            //                 // 获取ul em的下一个兄弟节点
+            //                 let ul = em[i].nextElementSibling
+
+            //                 // 添加li内容
+            //                 let li = `
+            //                 <span>
+            //                 <input type="checkbox">
+            //                 <i class="text-main">${data[index].val}</i>
+            //                 </span>
+            //                  <button class="del">X</button>
+            //                  `
+            //                 lis.innerHTML = li
+            //                 // 把li添加到ul里面
+            //                 ul.appendChild(lis)
+            //             }
+            //         }
+            //     })
+            // }
+
+            // 动态获取复选框
+            getCBox()
+        }
+
+
+
+
+
+
+        // 获取本地存储的数据
+        function getData() {
+            let data = JSON.parse(localStorage.getItem('data'))
+            if (data != null) {
+                return data
+            } else {
+                return []
+            }
+        }
+
+        // 获取当前时间
+        function nowDate() {
+            // 获取当前时间
+            let nowDate = new Date()
+            let y = nowDate.getFullYear()
+            let m = nowDate.getMonth() + 1
+            let d = nowDate.getDay()
+            let newDate = `${y}-${m}-${d}`
+
+            return newDate
+        }
+    </script>
+</body>
+
+</html>

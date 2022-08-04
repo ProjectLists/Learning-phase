@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            width: 500px;
+            margin: 100px auto;
+        }
+
+        thead tr th {
+            padding: 10px 0;
+        }
+
+        tbody tr {
+            text-align: center;
+        }
+
+        .add {
+            width: 250px;
+            margin: 100px auto;
+        }
+
+        .add input {
+            width: 70px;
+        }
+
+        .add button {
+            margin-top: 20px;
+            margin-left: 80px;
+        }
+    </style>
+</head>
+
+<body>
+    <table border="1" cellspacing='0'>
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>科目</th>
+                <th>成绩</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</body>
+<script>
+    // 创建数组对象
+    var data = [{
+        name: '小1',
+        kemu: '英语',
+        score: 99
+    }, {
+        name: '小2',
+        kemu: '数学',
+        score: 66
+    }, {
+        name: '小2',
+        kemu: '数学',
+        score: 66
+    }, {
+        name: '小2',
+        kemu: '数学',
+        score: 66
+    }, {
+        name: '小2',
+        kemu: '数学',
+        score: 66
+    }, {
+        name: '小2',
+        kemu: '数学',
+        score: 66
+    }, {
+        name: '小2',
+        kemu: '数学',
+        score: 66
+    }]
+
+    var tbody = document.querySelector('tbody')
+    // 创建tr
+    for (var i = 0; i < data.length; i++) {
+        var tr = document.createElement('tr')
+        tbody.appendChild(tr)
+
+        // 创建td
+        for (var k in data[i]) {
+            var td = document.createElement('td')
+            td.innerHTML = data[i][k]
+            tr.appendChild(td)
+        }
+        // 创建删除格
+        var delTd = document.createElement('td')
+        delTd.innerHTML = "<a href='javascript:;'>删除</a>"
+        tr.appendChild(delTd)
+
+        var as = delTd.children
+        for (var e = 0; e < as.length; e++) {
+            as[e].addEventListener('click', myFun)
+            function myFun() {
+                var trr = this.parentNode.parentNode
+                tbody.removeChild(trr)
+            }
+        }
+    }
+
+
+
+
+
+
+
+</script>
+
+</html>

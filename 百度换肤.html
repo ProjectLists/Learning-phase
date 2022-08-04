@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: url(image/01.jpg) no-repeat center 0px;
+        }
+
+        .box {
+            width: 650px;
+            height: 150px;
+            border: 1px solid gray;
+            margin: 100px auto;
+            padding: 5px 10px;
+            box-sizing: border-box;
+            background: #fff;
+        }
+
+        .box img {
+            width: 200px;
+            height: 140px;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box" id="box">
+        <img src="image/01.jpg" alt="">
+        <img src="image/02.jpg" alt="">
+        <img src="image/03.jpg" alt="">
+    </div>
+</body>
+<script>
+    var bd = document.body
+    var box = document.getElementById('box')
+    var imgs = box.getElementsByTagName('img')
+    for (var i = 0; i < imgs.length; i++) {
+        imgs[i].onclick = function () {
+            var imgPic = this.src
+            bd.style.backgroundImage = 'url(' + imgPic + ')'
+            console.log(i);
+        }
+    }
+
+    console.log(Date.now());
+    console.log(1);
+</script>
+
+</html>

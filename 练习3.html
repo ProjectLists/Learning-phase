@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul></ul>
+</body>
+<script>
+    /* var arr = [1, 2, 3, 1, 1, 1, 5, 6, 2]
+    var newArr = []
+    var soarr = arr.sort()
+    console.log(soarr);
+    for (var i = 0; i < soarr.length; i++) {
+        if (soarr[i] == soarr[i + 1] && soarr[i] != soarr[i - 1]) {
+            newArr.push(soarr[i])
+        }
+    }
+    console.log(newArr); */
+
+
+    /* var index = 2;
+    var array = [1, 2, 3, 1, 5, 6, 2]
+    let newArr = array.slice(0)
+    newArr.splice(2, 1)
+    console.log(newArr); */
+
+    var people = [
+        { name: '牛油1号', id: 1, age: 20 },
+        { name: '牛油2号', id: 2, age: 21 },
+        { name: '牛油3号', id: 3, age: 19 },
+    ]
+    var ul = document.querySelector('ul');
+    // 补全代码
+    for (var i = 0; i < people.length; i++) {
+        var li = document.createElement('li')
+        li.innerHTML = people[i].name + ' ' + people[i].age
+        ul.appendChild(li)
+    }
+</script>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background: rgba(0, 0, 0, 1)
+        }
+
+        ul {
+            width: 340px;
+            list-style: none;
+            margin: 340px auto;
+        }
+
+        li:nth-child(n+2) {
+            margin-left: 20px;
+        }
+
+        li {
+            float: left;
+            width: 100px;
+            height: 100px;
+            background: #fff;
+            color: black;
+            font-size: 50px;
+            text-align: center;
+            line-height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</body>
+<script>
+    var li = document.querySelectorAll('li')
+    // 未来的时间戳
+    var futureTime = +new Date('2022-4-11 18:30:00')
+    timer()
+    setInterval(timer, 1000)
+    function timer() {
+        // 当前时间戳
+        var nowTime = +new Date()
+        // 剩下的时间戳  除1000换算成秒
+        var isTime = (futureTime - nowTime) / 1000
+        // 小时
+        var h = parseInt(isTime / 60 / 60 % 24)
+        h = h < 10 ? '0' + h : h
+        li[0].innerHTML = h
+        // 分钟
+        var m = parseInt(isTime / 60 % 60)
+        m = m < 10 ? '0' + m : m
+        li[1].innerHTML = m
+        // 秒数
+        var s = parseInt(isTime % 60)
+        s = s < 10 ? '0' + s : s
+        li[2].innerHTML = s
+    }
+
+</script>
+
+</html>

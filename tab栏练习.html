@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 1000px;
+            height: 500px;
+            border: 1px solid rgb(182, 182, 182);
+            margin: 100px auto;
+        }
+
+        /* tab栏头部 */
+        .box_hd {
+            width: 100%;
+            height: 50px;
+            border-bottom: 1px solid rgb(153, 153, 153);
+            list-style: none;
+            line-height: 50px;
+        }
+
+        .box_hd li {
+            float: left;
+            padding: 0 20px;
+            cursor: pointer;
+        }
+
+        .box_hd .curennt {
+            background: rgb(54, 208, 255);
+        }
+
+        /* tab栏内容 */
+        .box_bd {
+            list-style: none;
+        }
+
+        .box_bd li:first-child {
+            display: block;
+        }
+
+        .box_bd li {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <ul class="box_hd">
+            <li class="curennt">产品介绍</li>
+            <li>产品优势</li>
+            <li>产品规格</li>
+            <li>相似产品</li>
+            <li>评论专区</li>
+        </ul>
+
+        <ul class="box_bd">
+            <li>产品优势131231231231231231</li>
+            <li>产品规格22222222</li>
+            <li>相似产品6666662</li>
+            <li>相似产品6666666661221</li>
+            <li>评论专区7777777777777</li>
+        </ul>
+    </div>
+</body>
+<script>
+    // 获取Tab栏头部里每个li
+    var liHd = document.querySelector('.box_hd').querySelectorAll('li')
+    // 获取Tab栏内容里每个li
+    var liBd = document.querySelector('.box_bd').querySelectorAll('li')
+
+    //遍历头部li
+    for (var i = 0; i < liHd.length; i++) {
+        // 给每个li添加新属性以及把索引赋值给新属性
+        liHd[i].setAttribute('index', i)
+        // 给每个li都添加点击事件
+        liHd[i].onclick = function () {
+
+            // 再次遍历头部li，每点击一次就清空所有类
+            for (var j = 0; j < liHd.length; j++) {
+                liHd[j].className = ''
+            }
+            // 当前被点击的li添加类
+            this.className = 'curennt'
+
+            // 获取头部li的新属性index
+            var index = this.getAttribute('index')
+            console.log(index);
+            // 遍历内容li
+            for (var e = 0; e < liBd.length; e++) {
+                liBd[e].style.display = 'none'
+            }
+            liBd[index].style.display = 'block'
+
+        }
+    }
+</script>
+
+</html>

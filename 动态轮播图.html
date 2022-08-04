@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            border: 1px solid gray;
+            margin: 0 auto;
+        }
+
+        .box .pic {
+            position: absolute;
+            left: 0;
+            width: 400%;
+            list-style: none;
+            animation: all 1s;
+        }
+
+        .box .pic img {
+            width: 800px;
+            height: 600px;
+        }
+
+        .box .pic li {
+            float: left;
+        }
+
+        .box .point {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translate(-50%, 0);
+            list-style: none;
+        }
+
+        .box .point li {
+            float: left;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .box .point li:nth-child(n+2) {
+            margin-left: 10px;
+        }
+
+        .btn_l,
+        .btn_r {
+            display: none;
+            position: absolute;
+            top: 50%;
+            transform: translate(0, -50%);
+            width: 20px;
+            height: 50px;
+            background: #fff;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+        }
+
+        .btn_l {
+            left: 0;
+        }
+
+        .btn_r {
+            right: 0;
+        }
+
+        .box .point .current {
+            background: orange;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <ul class="pic">
+            <li><img src="image/01.jpg" alt=""></li>
+            <li><img src="image/02.jpg" alt=""></li>
+            <li><img src="image/03.jpg" alt=""></li>
+        </ul>
+        <ul class="point">
+        </ul>
+        <div class="btn_l">&lt</div>
+        <div class="btn_r">&gt</div>
+    </div>
+</body>
+<script>
+    var box = document.querySelector('.box')
+    var btn_l = document.querySelector('.btn_l')
+    var btn_r = document.querySelector('.btn_r')
+    var pic = document.querySelector('.pic')
+    var point = document.querySelector('.point')
+    // 获取pic里面的li li代表每张图片
+    var pic_li = pic.children
+    // 添加一个变量 每点击一次就自增1
+    var index = 0
+
+    //封装动画函数
+    function animation(obj, target) {
+        // 每次执行都先停止一次动画 避免叠加速度快速切换
+        clearInterval(obj.timer)
+        obj.timer = setInterval(function () {
+            // 步数
+            var step = (target * index + obj.offsetLeft) / 10
+            step = step > 0 ? Math.ceil(step) : Math.floor(step)
+            // 如果pic的位置达到了目标值就停止动画
+            if (obj.offsetLeft == -target * index) {
+                clearInterval(obj.timer)
+            }
+            obj.style.left = obj.offsetLeft - step + 'px'
+        }, 1)
+    }
+
+
+    // 1、鼠标移入box 按钮就显示 和白点显示
+    box.addEventListener('mouseenter', function () {
+        btn_l.style.display = 'block'
+        btn_r.style.display = 'block'
+
+
+        //右边按钮事件
+        btn_r.addEventListener('click', function () {
+            index++
+            // 如果index等于li的个数，那么就回到0
+            if (index == pic_li.length) {
+                index = 0
+            }
+            animation(pic, box.clientWidth)
+        })
+        // 左边按钮事件
+        btn_l.addEventListener('click', function () {
+            index--
+            // 如果index等于li的个数，那么就回到0
+            if (index < 0) {
+                index = pic_li.length - 1
+            }
+            animation(pic, box.clientWidth)
+        })
+
+
+
+    })
+
+    // 添加白点个数
+    for (var i = 0; i < pic_li.length; i++) {
+
+        var li = document.createElement('li')
+        point.appendChild(li)
+        var point_li = point.children
+        //给白点添加序号属性
+        var li_index = point_li[i].setAttribute('data-index', i)
+        point_li[i].addEventListener('click', function () {
+            for (var j = 0; j < point_li.length; j++) {
+                point_li[j].className = ''
+            }
+            this.className = 'current'
+            // 点击白点图片跟随移动   
+            // 获取白点的data-index属性    
+            var dataIndex = this.getAttribute('data-index')
+            index = dataIndex
+
+            animation(pic, box.clientWidth)
+        })
+
+    }
+
+
+
+    // 1、鼠标移出box，按钮就隐藏
+    box.addEventListener('mouseleave', function () {
+        btn_l.style.display = 'none'
+        btn_r.style.display = 'none'
+    })
+
+</script>
+
+</html>

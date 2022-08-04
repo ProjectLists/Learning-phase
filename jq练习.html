@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jquery.min.js"></script>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <button class="hide">隐藏</button>
+    <button class="show">显示</button>
+    <script>
+        $(function () {
+            // $('.hide').click(function () {
+            //     $('.box').toggle(1000, 'linear', function () {
+            //         alert('完成')
+            //     })
+            // })
+
+            // $('.show').click(function () {
+            //     $('.box').show(1000, 'linear', function () {
+            //         alert('完成')
+            //     })
+            // })
+
+            // $('.hide').click(function () {
+            //     $('.box').fadeTo('fast', .5, function () {
+            //         alert('完成')
+            //     })
+            // })
+
+            // $('.show').click(function () {
+            //     $('.box').fadeIn(1000, 'linear', function () {
+            //         alert('完成')
+            //     })
+            // })
+
+            $('.hide').click(function () {
+                $('.box').slideDown(1000, function () {
+                    alert('完成')
+                })
+            })
+
+            $('.show').click(function () {
+                $('.box').fadeIn(1000, 'linear', function () {
+                    alert('完成')
+                })
+            })
+
+
+
+
+
+        })
+    </script>
+</body>
+
+</html>

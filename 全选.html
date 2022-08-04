@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .chtop {
+            width: 30px;
+            height: 30px;
+            margin: 0 auto;
+        }
+
+        .chtop input {
+            width: 30px;
+            height: 30px;
+        }
+
+        .che {
+            width: 30px;
+            height: 30px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="chtop">
+        <input type="checkbox" id="chtop">
+    </div>
+    <div class="che">
+        <input type="checkbox">
+        <input type="checkbox">
+        <input type="checkbox">
+        <input type="checkbox">
+        <input type="checkbox">
+    </div>
+
+</body>
+<script>
+    // 获取全选框
+    var chtop = document.getElementById('chtop')
+    // 获取全部复选框
+    var che = document.querySelector('.che').querySelectorAll('input')
+
+    // 创建全选框点击事件
+    chtop.onclick = function () {
+        // 遍历所有复选框
+        for (var i = 0; i < che.length; i++) {
+            // 复选框 与 全选框状态同时
+            che[i].checked = this.checked
+        }
+    }
+
+
+    // 遍历复选框
+    for (var i = 0; i < che.length; i++) {
+        // 创建复选框点击事件
+        che[i].onclick = function () {
+            // 添加一个新变量来判断
+            var flag = true;
+            // 检测是否全选
+            for (var j = 0; j < che.length; j++) {
+                // 如果有个复选框没选上那么就返回false，如果都选上了就不执行这个判断
+                if (che[j].checked == false) {
+                    flag = false
+                }
+            }
+            console.log(flag);
+            chtop.checked = flag
+
+        }
+    }
+</script>
+
+</html>
